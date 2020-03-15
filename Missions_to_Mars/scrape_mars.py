@@ -12,16 +12,12 @@ def scrape():
     mars_dict ={}
 
   # Mars News URL of page to be scraped
-    browser = Browser("chrome", headless = False)
     url = 'https://mars.nasa.gov/news/'
-    browser.visit(url)
-    time.sleep(1)
-    html = browser.html
+    html = requests.get(url).text
     title_soup = BeautifulSoup(html, 'html.parser')
     # Retrieve the latest news title and paragraph
     news_title = title_soup.find('div', class_='content_title').text
     news_par = title_soup.find('div', class_='rollover_description_inner').text
-    browser.quit()
 
     # Mars Image to be scraped
     browser = Browser('chrome', headless=False)
